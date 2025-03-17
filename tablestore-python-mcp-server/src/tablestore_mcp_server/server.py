@@ -26,12 +26,9 @@ mcp = FastMCP(
 
 @mcp.tool(name="tablestore-store", description=tool_settings.tool_store_description)
 async def store(
-        ctx: Context,
-        information: str,
-        # The `metadata` parameter is defined as non-optional, but it can be None.
-        # If we set it to be optional, some of the MCP clients, like Cursor, cannot
-        # handle the optional parameter correctly.
-        metadata: Optional[Metadata] = None,
+    ctx: Context,
+    information: str,
+    metadata: Optional[Metadata] = None,
 ) -> str:
     entry = Entry(content=information, metadata=metadata)
     tablestore_connector.store(entry)

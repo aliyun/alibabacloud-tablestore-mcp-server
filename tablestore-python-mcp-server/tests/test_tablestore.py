@@ -17,15 +17,12 @@ def embedding() -> BaseEmbedding:
 def tablestore_connector(embedding):
     tablestore_settings = settings.TablestoreSettings()
     if (
-            tablestore_settings.end_point is None
-            or tablestore_settings.instance_name is None
-            or tablestore_settings.access_key_id is None
-            or tablestore_settings.access_key_secret is None
+        tablestore_settings.end_point is None
+        or tablestore_settings.instance_name is None
+        or tablestore_settings.access_key_id is None
+        or tablestore_settings.access_key_secret is None
     ):
-        pytest.skip(
-            "end_point is None or instance_name is None or "
-            "access_key_id is None or access_key_secret is None"
-        )
+        pytest.skip("end_point is None or instance_name is None or access_key_id is None or access_key_secret is None")
 
     # 1. create tablestore vector store
     connector = TablestoreConnector(

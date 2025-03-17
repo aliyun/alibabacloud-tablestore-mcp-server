@@ -24,7 +24,12 @@ build-backend = "hatchling.build"
 dev-dependencies = [
     "pytest>=8.3.5",
     "pytest-asyncio>=0.23.0",
+    "ruff>=0.11.0",
 ]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true
 
 [project.scripts]
 tablestore-mcp-server = "tablestore_mcp_server.main:main"
@@ -32,5 +37,38 @@ tablestore-mcp-server = "tablestore_mcp_server.main:main"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = "test_*.py"
-python_functions = "test_*"
 asyncio_mode = "auto"
+
+
+[tool.ruff]
+line-length = 180
+indent-width = 4
+target-version = "py310"
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]

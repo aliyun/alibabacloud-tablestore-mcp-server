@@ -27,21 +27,20 @@ class Entry(BaseModel):
 
 
 class TablestoreConnector:
-
     def __init__(
-            self,
-            embedding: BaseEmbedding,
-            instance_name: str,
-            end_point: str,
-            access_key_id: str,
-            access_key_secret: str,
-            table_name: str,
-            index_name: str,
-            vector_dimension: int,
-            text_field: str,
-            vector_field: str,
-            metadata_mappings: Optional[List[tablestore.FieldSchema]] = None,
-            **kwargs: Any
+        self,
+        embedding: BaseEmbedding,
+        instance_name: str,
+        end_point: str,
+        access_key_id: str,
+        access_key_secret: str,
+        table_name: str,
+        index_name: str,
+        vector_dimension: int,
+        text_field: str,
+        vector_field: str,
+        metadata_mappings: Optional[List[tablestore.FieldSchema]] = None,
+        **kwargs: Any,
     ):
         self._embedding = embedding
         tablestore_client = tablestore.OTSClient(
@@ -61,7 +60,7 @@ class TablestoreConnector:
             vector_field=vector_field,
             # optional: custom metadata mapping is used to filter non-vector fields.
             metadata_mappings=metadata_mappings,
-            **kwargs
+            **kwargs,
         )
         # validate parameters
         logger.info(f"""parameters:
@@ -81,7 +80,9 @@ class TablestoreConnector:
         for schema in schemas.fields:
             if schema.field_name == vector_field and schema.vector_options:
                 if schema.vector_options.dimension != vector_dimension:
-                    raise ValueError(f"index vector options does not match dimension, dimension in schema is {schema.vector_options.dimension} but configuration is {vector_dimension}")
+                    raise ValueError(
+                        f"index vector options does not match dimension, dimension in schema is {schema.vector_options.dimension} but configuration is {vector_dimension}"
+                    )
                 else:
                     logger.debug(f"vector options matches dimension {schema.vector_options.dimension}")
 

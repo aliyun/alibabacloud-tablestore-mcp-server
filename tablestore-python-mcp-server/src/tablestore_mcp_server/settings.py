@@ -64,6 +64,7 @@ class TablestoreSettings(BaseSettings):
     """
     Configuration for Tablestore.
     """
+
     instance_name: Optional[str] = Field(validation_alias="TABLESTORE_INSTANCE_NAME")
     end_point: Optional[str] = Field(validation_alias="TABLESTORE_ENDPOINT")
     access_key_id: Optional[str] = Field(validation_alias="TABLESTORE_ACCESS_KEY_ID")
