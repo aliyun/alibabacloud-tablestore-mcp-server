@@ -108,7 +108,7 @@ class TablestoreConnector:
                 query_str=query,
                 similarity_top_k=size,
             ),
-            knn_top_k=1000,
+            knn_top_k=min(1000, size + 100),
         )
         return [
             Entry(
