@@ -31,7 +31,7 @@ Tablestore(表格存储) 的多元索引支持向量、标量、全文检索等�
 
 `cherry-studio` 搜索查询示例如下图:
 
-<img src="docs/img/search_ui.jpg" alt="search_ui" width="500"/>
+<img src="./docs/img/search_ui.jpg" alt="search_ui" width="500"/>
 
 `python` Server 端的查询日志如下图:
 
