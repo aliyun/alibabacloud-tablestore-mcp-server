@@ -1,4 +1,6 @@
-# tablestore-mcp-server: A Tablestore MCP server
+# tablestore-mcp-server
+
+A Tablestore MCP server.
 
 > [模型上下文协议（Model Context Protocol，MCP）](https://modelcontextprotocol.io/introduction)是一个开放协议，支持大型语言模型（LLM）应用程序与外部数据源及工具之间的无缝集成。
 > 无论是开发AI驱动的集成开发环境（IDE）、增强聊天界面功能，还是创建定制化AI工作流，MCP均提供了一种标准化方案，
@@ -15,15 +17,15 @@
 
 `cherry-studio` 使用示例如下图:
 
-<img src="docs/img/store_ui.jpg" alt="store" width="500"/>
+<img src="./docs/img/store_ui.jpg" alt="store" width="500"/>
 
 `python` Server 端代码的写入日志如下图:
 
-<img src="docs/img/store_log.jpg" alt="store_log" width="500"/>
+<img src="./docs/img/store_log.jpg" alt="store_log" width="500"/>
 
 Tablestore(表格存储) 控制台数据存储结果如下图:
 
-<img src="docs/img/store_ots.jpg" alt="store_ots" width="500"/>
+<img src="./docs/img/store_ots.jpg" alt="store_ots" width="500"/>
 
 ## 1.2 搜索文档
 
@@ -35,15 +37,15 @@ Tablestore(表格存储) 的多元索引支持向量、标量、全文检索等�
 
 `python` Server 端的查询日志如下图:
 
-<img src="docs/img/search_log.jpg" alt="search_log" width="500"/>
+<img src="./docs/img/search_log.jpg" alt="search_log" width="500"/>
 
 Tablestore(表格存储) 控制台数据也可以进行查询，这里以全文检索示例:
 
-<img src="docs/img/search_ots.jpg" alt="search_ots" width="500"/>
+<img src="./docs/img/search_ots.jpg" alt="search_ots" width="500"/>
 
 # 2. 流程
 
-<img src="docs/img/pipline.jpg" alt="search_ots" width="500"/>
+<img src="./docs/img/pipline.jpg" alt="search_ots" width="500"/>
 
 MCP server 提供的 2 个工具十分简单：
 
@@ -142,11 +144,11 @@ MCP server 提供的 2 个工具十分简单：
 
 按照如下所示创建MCP服务:
 
-<img src="docs/img/cherry_studio.jpg" alt="search_ui" width="500"/>
+<img src="./docs/img/cherry_studio.jpg" alt="search_ui" width="500"/>
 
 在聊天里使用MCP服务（可以把一些模版填充到 Cherry Studio 的模版里，生成一个自己的特殊助手，后续可以直接使用）：
 
-<img src="docs/img/cherry_studio_input.jpg" alt="search_ui" width="500"/>
+<img src="./docs/img/cherry_studio_input.jpg" alt="search_ui" width="500"/>
 
 
 # 5.1 拓展能力
@@ -179,7 +181,7 @@ MCP 的 Tool 的能力是 Tool 的描述来提供的，因此我们可以定义�
 ```
 即可连接并展示MCP的一些能力，我们这里仅仅使用了Tools，可以直接在界面上进行调试和运行。
 
-<img src="docs/img/mcp_inspector.jpg" alt="search_ui" width="500"/>
+<img src="./docs/img/mcp_inspector.jpg" alt="search_ui" width="500"/>
 
 ## 6.3 本地调试: stdio 模式
 下面命令会自动运行 `MCP Inspector`，打开UI界面使用 stdio 进行链接即可，但是体验没有 sse 模式友好。因此建议 AI client 使用 sse 传输连接到 MCP 服务器，sse 模式可以轻松地与你的团队共享服务器或在云环境中使用。
