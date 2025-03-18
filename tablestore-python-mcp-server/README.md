@@ -151,15 +151,19 @@ MCP server 提供的 2 个工具十分简单：
 <img src="./docs/img/cherry_studio_input.jpg" alt="search_ui" width="500"/>
 
 
-# 5.1 拓展能力
-MCP 的 Tool 的能力是 Tool 的描述来提供的，因此我们可以定义一些特殊的能力，可以发挥你的想象力，仅需要修改如下配置即可, 如何写可以参考 [settings.py](src/tablestore_mcp_server/settings.py)。
+# 5.1 拓展应用场景
+MCP 的 Tool 的能力和场景是 Tool 的描述来提供的，因此我们可以定义一些特殊的能力，可以发挥你的想象力。另外，当前我们没有接入一些复杂的多字段自由 Filter 能力、稀疏向量(Sparse Vector)能力，后续有时间会继续进行集成。
+
+仅需要修改如下配置即可, 如何写可以参考 [settings.py](src/tablestore_mcp_server/settings.py)
 
 ```shell
   export TOOL_STORE_DESCRIPTION="你的自定义的描述"
   export TOOL_SEARCH_DESCRIPTION="你的自定义的描述"
 ```
 
-另外，当前我们没有接入一些复杂的多字段自由 Filter 能力、稀疏向量(Sparse Vector)能力，后续有时间会继续进行集成。
+修改后从 MCP Client 中可以看到工具 (Tool) 的描述已经变成了自定义的描述，那么大模型（LLM）就会根据你的描述去使用工具(Tool)。
+
+<img src="./docs/img/custom_description.jpg" alt="search_ui" width="500"/>
 
 # 6. 贡献代码和二次开发
 
