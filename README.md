@@ -7,7 +7,10 @@ A Tablestore MCP server.
 > 可将LLMs与其所需的关键背景信息高效连接。
 
 
-不同语言的实现:
+# 各种语言的实现
 
-- Python: [tablestore-python-mcp-server](./tablestore-python-mcp-server/README.md)
-- Java: TODO
+### 1. Python 
+[tablestore-python-mcp-server](./tablestore-python-mcp-server/README.md)
+
+### 2. Java
+[tablestore-java-mcp-server](./tablestore-python-mcp-server/README.md)
