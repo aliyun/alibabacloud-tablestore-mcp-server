@@ -13,4 +13,4 @@ A Tablestore MCP server.
 [tablestore-python-mcp-server](./tablestore-python-mcp-server/README.md)
 
 ### 2. Java
-[tablestore-java-mcp-server](./tablestore-python-mcp-server/README.md)
+[tablestore-java-mcp-server](./tablestore-java-mcp-server/README.md)
