@@ -178,7 +178,7 @@ MCP 的 Tool 的能力和场景是 Tool 的描述来提供的，因此我们可�
 
 ## 6.2 本地调试: sse 模式
 
-首先在 PyCharm 里启动 `src/tablestore_mcp_server/server.py`即可，然后运行可视化调试界面 `MCP Inspector`, 根据 Terminal的日志提示打开"http://localhost:5173"进行调试。
+首先在 PyCharm 里启动 `src/tablestore_mcp_server/main.py`即可，然后运行可视化调试界面 `MCP Inspector`, 根据 Terminal的日志提示打开"http://localhost:5173"进行调试。
 ```shell
   # 启动 MCP Inspector
   npx @modelcontextprotocol/inspector node build/index.js
