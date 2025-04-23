@@ -10,3 +10,10 @@
 
 ## 2. Python 
 1. [入门示例: tablestore-python-mcp-server](./tablestore-python-mcp-server/README.md)
+
+
+## 技术支持
+
+欢迎加入我们的钉钉公开群，与我们一起探讨 AI 技术。钉钉群号：36165029092
+
+<img src="./docs/img/dingding_group3.png" alt="store" width="500"/>
