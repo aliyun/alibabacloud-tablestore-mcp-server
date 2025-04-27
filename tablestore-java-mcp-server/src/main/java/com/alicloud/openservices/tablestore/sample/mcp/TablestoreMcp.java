@@ -17,12 +17,12 @@ public class TablestoreMcp {
     @Bean
     public ToolCallbackProvider myTools(TablestoreService tablestoreService) {
 
-        FunctionToolCallback<Entry, Void> storeTool = FunctionToolCallback.builder("store", tablestoreService::store)
+        FunctionToolCallback<Entry, Void> storeTool = FunctionToolCallback.builder("store to tablestore", tablestoreService::store)
                 .description("Store document into Tablestore(表格存储) for later retrieval.")
                 .inputType(Entry.class)
                 .build();
 
-        FunctionToolCallback<QueryRequest, List<Entry>> searchTools = FunctionToolCallback.builder("search", tablestoreService::search)
+        FunctionToolCallback<QueryRequest, List<Entry>> searchTools = FunctionToolCallback.builder("search from tablestore", tablestoreService::search)
                 .description("Search for similar documents on natural language descriptions from Tablestore(表格存储)")
                 .inputType(QueryRequest.class)
                 .build();
