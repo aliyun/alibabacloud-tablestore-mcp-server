@@ -1,6 +1,6 @@
 version = 1
-revision = 1
-requires-python = ">=3.10"
+revision = 2
+requires-python = ">=3.10, <4.0"
 resolution-markers = [
     "python_full_version >= '3.12'",
     "python_full_version == '3.11.*'",
@@ -322,6 +322,19 @@ wheels = [
     { url = "https://mirrors.aliyun.com/pypi/packages/2c/f3/479acfa99803c261cdd6b44f37b55bd77bdbce6163ec1f51b2014b095495/crc32c-2.7.1-pp310-pypy310_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a01b0983aa87f517c12418f9898ecf2083bf86f4ea04122e053357c3edb0d73f" },
     { url = "https://mirrors.aliyun.com/pypi/packages/7b/31/4edb9c45457c54d51ca539f850761f31b7ab764177902b6f3247ff8c1b75/crc32c-2.7.1-pp310-pypy310_pp73-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cb2b963c42128b38872e9ed63f04a73ce1ff89a1dfad7ea38add6fe6296497b8" },
     { url = "https://mirrors.aliyun.com/pypi/packages/a6/b0/5680db08eff8f2116a4f9bd949f8bbe9cf260e1c3451228f54c60b110d79/crc32c-2.7.1-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:cdd5e576fee5d255c1e68a4dae4420f21e57e6f05900b38d5ae47c713fc3330d" },
+]
+
+[[package]]
+name = "dashscope"
+version = "1.23.2"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple/" }
+dependencies = [
+    { name = "aiohttp" },
+    { name = "requests" },
+    { name = "websocket-client" },
+]
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/00/c8/afd737ff28f63c3ce846985f0865f29e27590148003f4df1edeb0b5761d6/dashscope-1.23.2-py3-none-any.whl", hash = "sha256:d2d17561ca58fcdeef6eef157efbd7d68b655551895be24d3c80e743eff21aa1" },
 ]
 
 [[package]]
@@ -838,6 +851,19 @@ dependencies = [
 sdist = { url = "https://mirrors.aliyun.com/pypi/packages/28/f7/3e4ad0693943ada4a1099fa394ebe6c06b69bd715a7ff7c6d0b091814358/llama_index_core-0.12.24.post1.tar.gz", hash = "sha256:2d0ab7e819dc064a8a9256cf2719d25fe12018fc5357e681a2e97f7b5988562c" }
 wheels = [
     { url = "https://mirrors.aliyun.com/pypi/packages/fc/cb/014da862f7f53ad2c0b388426de06099526d7736613166c9af113d41d19f/llama_index_core-0.12.24.post1-py3-none-any.whl", hash = "sha256:cc2cb1f0508b6a7ae85dae72082a4e597e29fca349c67b7e319c2698f24cac61" },
+]
+
+[[package]]
+name = "llama-index-embeddings-dashscope"
+version = "0.3.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple/" }
+dependencies = [
+    { name = "dashscope" },
+    { name = "llama-index-core" },
+]
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/d9/70/d81ec3dc337fa0fa4c546e6e085674c08fb60db823eb3683c01d3f5d19ef/llama_index_embeddings_dashscope-0.3.0.tar.gz", hash = "sha256:c882444d6efb8232821a340d1b0d190444714eae90cf619da91ac41a26ce7028" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/c9/6f/b0940079e8ba5c2565edffc17bab8667feb9a3e0cf68ed90aa00e34f1903/llama_index_embeddings_dashscope-0.3.0-py3-none-any.whl", hash = "sha256:5bf10f4b30d063010c0ad7bc47a025f82dacf646cf0b5a012f6b5a387af7a1cc" },
 ]
 
 [[package]]
@@ -2321,10 +2347,11 @@ sdist = { url = "https://mirrors.aliyun.com/pypi/packages/0f/ed/5bdd906ec9d2dbae
 
 [[package]]
 name = "tablestore-mcp-server"
-version = "0.1.0"
+version = "0.1.2"
 source = { editable = "." }
 dependencies = [
     { name = "llama-index" },
+    { name = "llama-index-embeddings-dashscope" },
     { name = "llama-index-embeddings-huggingface" },
     { name = "llama-index-embeddings-instructor" },
     { name = "llama-index-vector-stores-tablestore" },
@@ -2344,6 +2371,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "llama-index", specifier = ">=0.12.24" },
+    { name = "llama-index-embeddings-dashscope", specifier = ">=0.3.0,<0.4.0" },
     { name = "llama-index-embeddings-huggingface", specifier = ">=0.5.2" },
     { name = "llama-index-embeddings-instructor", specifier = ">=0.3.0" },
     { name = "llama-index-vector-stores-tablestore", specifier = ">=0.2.2" },
@@ -2635,6 +2663,15 @@ dependencies = [
 sdist = { url = "https://mirrors.aliyun.com/pypi/packages/4b/4d/938bd85e5bf2edeec766267a5015ad969730bb91e31b44021dfe8b22df6c/uvicorn-0.34.0.tar.gz", hash = "sha256:404051050cd7e905de2c9a7e61790943440b3416f49cb409f965d9dcd0fa73e9" }
 wheels = [
     { url = "https://mirrors.aliyun.com/pypi/packages/61/14/33a3a1352cfa71812a3a21e8c9bfb83f60b0011f5e36f2b1399d51928209/uvicorn-0.34.0-py3-none-any.whl", hash = "sha256:023dc038422502fa28a09c7a30bf2b6991512da7dcdb8fd35fe57cfc154126f4" },
+]
+
+[[package]]
+name = "websocket-client"
+version = "1.8.0"
+source = { registry = "https://mirrors.aliyun.com/pypi/simple/" }
+sdist = { url = "https://mirrors.aliyun.com/pypi/packages/e6/30/fba0d96b4b5fbf5948ed3f4681f7da2f9f64512e1d303f94b4cc174c24a5/websocket_client-1.8.0.tar.gz", hash = "sha256:3239df9f44da632f96012472805d40a23281a991027ce11d2f45a6f24ac4c3da" }
+wheels = [
+    { url = "https://mirrors.aliyun.com/pypi/packages/5a/84/44687a29792a70e111c5c477230a72c4b957d88d16141199bf9acb7537a3/websocket_client-1.8.0-py3-none-any.whl", hash = "sha256:17b44cc997f5c498e809b22cdf2d9c7a9e71c02c8cc2b6c56e7c2d1239bfa526" },
 ]
 
 [[package]]

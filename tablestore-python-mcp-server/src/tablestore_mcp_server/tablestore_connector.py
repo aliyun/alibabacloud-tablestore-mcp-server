@@ -103,7 +103,7 @@ class TablestoreConnector:
         # Search in tablestore
         search_results = self._store.query(
             query=VectorStoreQuery(
-                mode=VectorStoreQueryMode.HYBRID,
+                mode=VectorStoreQueryMode.DEFAULT,
                 query_embedding=query_embedding,
                 query_str=query,
                 similarity_top_k=size,

@@ -55,3 +55,11 @@ class TestEmbeddingProvider:
         assert len(embedding1) == len(embedding2)
 
         np.testing.assert_array_almost_equal(np.array(embedding1), np.array(embedding2))
+
+    def test_dash_scope(self):
+        provider = embedding_provider.create_embedding(settings.EmbeddingProviderSettings())
+        assert provider.model_name == "text-embedding-v3"
+        query = "这是一个测试查询语句"
+
+        embedding1 = provider.get_query_embedding(query)
+        assert len(embedding1) > 0

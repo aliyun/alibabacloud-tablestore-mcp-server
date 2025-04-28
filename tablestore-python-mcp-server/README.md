@@ -96,23 +96,24 @@ MCP server 提供的 2 个工具十分简单：
 
 代码里所有的配置是通过环境变量来实现的，出完整的变量见下方表格。 主要依赖的数据库 [Tablestore(表格存储)](https://www.aliyun.com/product/ots) 支持按量付费，使用该工具，表和索引都会自动创建，仅需要在控制台上申请一个实例即可。
 
-| 变量名                          |                              必填                              |         含义         |                              默认值                               |
-|------------------------------|:------------------------------------------------------------:|:------------------:|:--------------------------------------------------------------:|
-| SERVER_HOST                  |                             _否_                              | MCP server 的 host  |                            0.0.0.0                             |
-| SERVER_PORT                  |                             _否_                              | MCP server 的 port  |                              8001                              |
-| TABLESTORE_INSTANCE_NAME     | <span style="color:red; font-weight:bold;">**是(yes)**</span> |        实例名         |                               -                                |
-| TABLESTORE_ENDPOINT          | <span style="color:red; font-weight:bold;">**是(yes)**</span> |       实例访问地址       |                               -                                |
-| TABLESTORE_ACCESS_KEY_ID     | <span style="color:red; font-weight:bold;">**是(yes)**</span> |       秘钥 ID        |                               -                                |
-| TABLESTORE_ACCESS_KEY_SECRET | <span style="color:red; font-weight:bold;">**是(yes)**</span> |     秘钥 SECRET      |                               -                                |
-| TABLESTORE_TABLE_NAME        |                             _否_                              |         表名         |                      ts_mcp_server_py_v1                       |
-| TABLESTORE_INDEX_NAME        |                             _否_                              |        索引名         |                   ts_mcp_server_py_index_v1                    |
-| TABLESTORE_VECTOR_DIMENSION  |                             _否_                              |        向量维度        |                              768                               |
-| TABLESTORE_TEXT_FIELD        |                             _否_                              |       文本字段名        |                            _content                            |
-| TABLESTORE_VECTOR_FIELD      |                             _否_                              |       向量字段名        |                           _embedding                           |
-| EMBEDDING_PROVIDER_TYPE      |                             _否_                              |  Embedding 模型提供者   |                hugging_face（当前仅支持 hugging_face）                |
-| EMBEDDING_MODEL_NAME         |                             _否_                              |   Embedding 模型名字   | BAAI/bge-base-zh-v1.5(维度是768，和 TABLESTORE_VECTOR_DIMENSION 呼应) |
-| TOOL_STORE_DESCRIPTION       |                             _否_                              | 写入的 MCP tool 的描述文字 |    参考 [settings.py](src/tablestore_mcp_server/settings.py)     |
-| TOOL_SEARCH_DESCRIPTION      |                             _否_                              | 查询的 MCP tool 的描述文字 |    参考 [settings.py](src/tablestore_mcp_server/settings.py)     |
+| 变量名                          |                              必填                              |                             含义                              |                              默认值                               |
+|------------------------------|:------------------------------------------------------------:|:-----------------------------------------------------------:|:--------------------------------------------------------------:|
+| SERVER_HOST                  |                             _否_                              |                      MCP server 的 host                      |                            0.0.0.0                             |
+| SERVER_PORT                  |                             _否_                              |                      MCP server 的 port                      |                              8001                              |
+| TABLESTORE_INSTANCE_NAME     | <span style="color:red; font-weight:bold;">**是(yes)**</span> |                             实例名                             |                               -                                |
+| TABLESTORE_ENDPOINT          | <span style="color:red; font-weight:bold;">**是(yes)**</span> |                           实例访问地址                            |                               -                                |
+| TABLESTORE_ACCESS_KEY_ID     | <span style="color:red; font-weight:bold;">**是(yes)**</span> |                            秘钥 ID                            |                               -                                |
+| TABLESTORE_ACCESS_KEY_SECRET | <span style="color:red; font-weight:bold;">**是(yes)**</span> |                          秘钥 SECRET                          |                               -                                |
+| TABLESTORE_TABLE_NAME        |                             _否_                              |                             表名                              |                      ts_mcp_server_py_v1                       |
+| TABLESTORE_INDEX_NAME        |                             _否_                              |                             索引名                             |                   ts_mcp_server_py_index_v1                    |
+| TABLESTORE_VECTOR_DIMENSION  |                             _否_                              |                            向量维度                             |                              768                               |
+| TABLESTORE_TEXT_FIELD        |                             _否_                              |                            文本字段名                            |                            _content                            |
+| TABLESTORE_VECTOR_FIELD      |                             _否_                              |                            向量字段名                            |                           _embedding                           |
+| EMBEDDING_PROVIDER_TYPE      |                             _否_                              |        Embedding 模型提供者: 目前包括：hugging_face、dashscope         |                hugging_face                |
+| EMBEDDING_MODEL_NAME         |                             _否_                              |                       Embedding 模型名字                        | BAAI/bge-base-zh-v1.5(维度是768，和 TABLESTORE_VECTOR_DIMENSION 呼应) |
+| DASHSCOPE_API_KEY         |                             _否_                              | 百炼的API_KEY(当EMBEDDING_PROVIDER_TYPE为 dashscope 时候，需要提供该参数) |                               -                                |
+| TOOL_STORE_DESCRIPTION       |                             _否_                              |                     写入的 MCP tool 的描述文字                      |    参考 [settings.py](src/tablestore_mcp_server/settings.py)     |
+| TOOL_SEARCH_DESCRIPTION      |                             _否_                              |                     查询的 MCP tool 的描述文字                      |    参考 [settings.py](src/tablestore_mcp_server/settings.py)     |
 
 
 ## 3.4 Embedding
@@ -131,6 +132,14 @@ MCP server 提供的 2 个工具十分简单：
    export TABLESTORE_ENDPOINT=xxx
    export TABLESTORE_INSTANCE_NAME=xxx
    # 默认以 sse 模式运行，如果希望以 stdio 模式运行可以添加: `--transport stdio`
+   uv run tablestore-mcp-server
+```
+
+如果你想使用云端Embedding模型例如百炼的Dashscope通用Embedding模型，可以如下使用：
+```
+   export DASHSCOPE_API_KEY=sk-xxxx
+   export EMBEDDING_PROVIDER_TYPE=dashscope
+   export EMBEDDING_MODEL_NAME=text-embedding-v3
    uv run tablestore-mcp-server
 ```
 
@@ -202,4 +211,13 @@ MCP 的 Tool 的能力和场景是 Tool 的描述来提供的，因此我们可�
 ```bash
    ruff check
    ruff format
+```
+
+## 6.5 发布
+```
+export UV_PUBLISH_TOKEN="xxxx"
+
+rm -rf dist
+uv build
+uv publish
 ```

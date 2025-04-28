@@ -1,6 +1,7 @@
 import logging
 
 from llama_index.core.base.embeddings.base import BaseEmbedding
+from llama_index.embeddings.dashscope import DashScopeEmbedding
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 from tablestore_mcp_server.embedding.type import EmbeddingProviderType
@@ -15,6 +16,10 @@ def create_embedding(settings: EmbeddingProviderSettings) -> BaseEmbedding:
         raise ValueError("`model_name` is empty")
     if settings.provider_type == EmbeddingProviderType.HUGGING_FACE:
         embed_model = HuggingFaceEmbedding(model_name=settings.model_name)
+        return embed_model
+    elif settings.provider_type == EmbeddingProviderType.DASH_SCOPE:
+        logger.info(f"api_key: {settings.dash_scope_api_key}")
+        embed_model = DashScopeEmbedding(model_name=settings.model_name, api_key=settings.dash_scope_api_key)
         return embed_model
     else:
         raise ValueError(f"unsupported embedding type: {settings.provider_type}")

@@ -6,18 +6,18 @@ from pydantic_settings import BaseSettings
 from tablestore_mcp_server.embedding.type import EmbeddingProviderType
 
 DEFAULT_TOOL_STORE_DESCRIPTION = """
-Store document into Tablestore(表格存储) for later retrieval. 
+将文档存储到Tablestore（表格存储）以供后续检索。
 
-The input parameter: 
-1. The 'information' parameter should contain a natural language document content. 
-2. The 'metadata' parameter is a Python dictionary with strings as keys, which can store some meta data related to this document.
+输入参数：
+1. 'information' 参数应包含自然语言的文档内容。
+2. 'metadata' 参数是一个Python字典，键为字符串，可以存储与该文档相关的元数据。
 """
 DEFAULT_TOOL_SEARCH_DESCRIPTION = """
-Search for similar documents on natural language descriptions from Tablestore(表格存储).
+从Tablestore(表格存储)中使用自然语言形式的文本来搜索相似性文档。
 
-The input parameter: 
-1. The 'query' parameter should describe what you're looking for, and the tool will return the most relevant documents.
-2. The 'size' parameter: the number of similar documents to be returned.
+输入参数： 
+1. 'query' 参数应该描述你正在寻找的内容，该工具将返回最相关的文档。
+2. 'size' 参数：要返回的相似文档的数量。
 """
 
 
@@ -57,6 +57,11 @@ class EmbeddingProviderSettings(BaseSettings):
     model_name: str = Field(
         default="BAAI/bge-base-zh-v1.5",
         alias="EMBEDDING_MODEL_NAME",
+    )
+
+    dash_scope_api_key: str = Field(
+        default="",
+        validation_alias="DASHSCOPE_API_KEY",
     )
 
 
