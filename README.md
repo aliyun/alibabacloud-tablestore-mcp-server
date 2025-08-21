@@ -1,5 +1,6 @@
 
 # [Tablestore](https://www.aliyun.com/product/ots) MCP servers.
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/aliyun/alibabacloud-tablestore-mcp-server)](https://archestra.ai/mcp-catalog/aliyun__alibabacloud-tablestore-mcp-server)
 
 ## 实现列表
 
