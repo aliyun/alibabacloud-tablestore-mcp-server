@@ -2,7 +2,7 @@ import logging
 import json
 from typing import Dict
 
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 from mcp.server.sse import SseServerTransport
 
 from fastapi import FastAPI, Request
@@ -128,6 +128,7 @@ async def delete_all_memories() -> str:
 
 
 @mcp_router.get("/{client_name}/sse/{user_id}/")
+@mcp_router.get("/{client_name}/sse/{user_id}")
 async def handle_sse(request: Request):
     """Handle SSE connections for a specific user and client"""
     # Extract user_id and client_name from path parameters
@@ -152,6 +153,12 @@ async def handle_sse(request: Request):
         # Clean up context variables
         user_id_var.reset(user_token)
         client_name_var.reset(client_token)
+
+
+# remove tool in tool black list
+if tool_settings.tool_black_list:
+    for tool in tool_settings.tool_black_list:
+        mcp.remove_tool(tool)
 
 
 @mcp_router.post("/messages/")

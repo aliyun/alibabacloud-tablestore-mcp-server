@@ -35,6 +35,8 @@ class ToolSettings(BaseSettings):
         validation_alias="TOOL_DELETE_ALL_MEMORIES_DESCRIPTION",
     )
 
+    tool_black_list: list[str] = Field(default_factory=lambda: ['delete_all_memories'], validation_alias="TOOL_BLACK_LIST")
+
 
 class StdioNameSettings(BaseSettings):
     user_id: str = Field(default="stdio_default_user", validation_alias="MCP_STDIO_USER_ID")
@@ -83,10 +85,20 @@ class VectorStoreSettings(BaseSettings):
     sts_token: Optional[str] = Field(default=None, validation_alias="TABLESTORE_STS_TOKEN")
 
 
+class Mem0PromptSettings(BaseSettings):
+    """
+    Configuration for mem0 prompt.
+    """
+
+    fact_extraction_prompt: Optional[str] = Field(default=None, validation_alias="MEM0_FACT_EXTRACTION_PROMPT")
+    update_memory_prompt: Optional[str] = Field(default=None, validation_alias="MEM0_UPDATE_MEMORY_PROMPT")
+
+
 def get_memory_config():
     llm_settings = LLMSettings()
     embedder_settings = EmbedderSettings()
     vector_store_settings = VectorStoreSettings()
+    mem0_prompt_settings = Mem0PromptSettings()
 
     return {
         "llm": {
@@ -116,4 +128,6 @@ def get_memory_config():
                 "sts_token": vector_store_settings.sts_token,
             },
         },
+        "custom_fact_extraction_prompt": mem0_prompt_settings.fact_extraction_prompt,
+        "custom_update_memory_prompt": mem0_prompt_settings.update_memory_prompt,
     }
