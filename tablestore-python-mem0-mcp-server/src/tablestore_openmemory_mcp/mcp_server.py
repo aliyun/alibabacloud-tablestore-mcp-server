@@ -10,7 +10,7 @@ from fastapi.routing import APIRouter
 import contextvars
 from mem0 import Memory
 
-from tablestore_openmemory_mcp.settings import ToolSettings, StdioNameSettings
+from tablestore_openmemory_mcp.settings import ToolSettings, StdioNameSettings, VectorStoreSettings
 
 from tablestore_openmemory_mcp.settings import get_memory_config
 
@@ -19,7 +19,7 @@ mcp = FastMCP("mem0-mcp-server")
 
 tool_settings = ToolSettings()
 stdio_name_settings = StdioNameSettings()
-
+vector_store_settings = VectorStoreSettings()
 config = get_memory_config()
 memory_client = Memory.from_config(config_dict=config)
 
@@ -79,7 +79,13 @@ async def search_memories(query: str) -> str:
         return "Error: client_name not provided"
 
     try:
-        memories = memory_client.search(query=query, user_id=uid, limit=10, filters={client_name_key: client_name})
+        memories = memory_client.search(
+            query=query, 
+            user_id=uid, 
+            limit=vector_store_settings.search_memory_limit, 
+            filters={client_name_key: client_name}, 
+            threshold=vector_store_settings.search_memory_min_score,
+        )
         memories = [memory for memory in parse_memories(memories)]
 
         return json.dumps(memories, indent=2, ensure_ascii=False)

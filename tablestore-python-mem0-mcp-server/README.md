@@ -54,29 +54,31 @@ A based Tablestore Mem0 Python MCP Server.
 
 代码里所有的配置是通过环境变量来实现的，出完整的变量见下方表格。 主要依赖的数据库 [Tablestore(表格存储)](https://www.aliyun.com/product/ots) 支持按量付费，使用该工具，表和索引都会自动创建，仅需要在控制台上申请一个实例即可。
 
-| 变量名                                  |                              必填                              |         含义          |            默认值            |
-|--------------------------------------|:------------------------------------------------------------:|:-------------------:|:-------------------------:|
-| SERVER_HOST                          |                             _否_                              |  MCP server 的 host  |          0.0.0.0          |
-| SERVER_PORT                          |                             _否_                              |  MCP server 的 port  |           8765            |
-| TABLESTORE_INSTANCE_NAME             | <span style="color:red; font-weight:bold;">**是(yes)**</span> |         实例名         |             -             |
-| TABLESTORE_ENDPOINT                  | <span style="color:red; font-weight:bold;">**是(yes)**</span> |       实例访问地址        |             -             |
-| TABLESTORE_ACCESS_KEY_ID             | <span style="color:red; font-weight:bold;">**是(yes)**</span> |        秘钥 ID        |             -             |
-| TABLESTORE_ACCESS_KEY_SECRET         | <span style="color:red; font-weight:bold;">**是(yes)**</span> |      秘钥 SECRET      |             -             |
-| TABLESTORE_STS_TOKEN                 |                             _否_                              |      STS Token      |           None            |
-| TABLESTORE_VECTOR_DIMENSION          |                             _否_                              |        向量维度         |           1536            |
-| OPENAI_API_KEY                       | <span style="color:red; font-weight:bold;">**是(yes)**</span> |     大模型的API_KEY     |             -             |
-| OPENAI_BASE_URL                      | <span style="color:red; font-weight:bold;">**是(yes)**</span> |    大模型的BASE_URL     |             -             |
-| LLM_MODEL                            |                             _否_                              |      大语言模型的名字       |         qwen-plus         |
-| EMBEDDER_MODEL                       |                             _否_                              |       编码模型的名字       |     text-embedding-v4     |
-| TOOL_ADD_MEMORIES_DESCRIPTION        |                             _否_                              |  添加记忆的MCP TOOL描述文字  |       参考settings.py       |
-| TOOL_SEARCH_MEMORIES_DESCRIPTION     |                             _否_                              |  检索记忆的MCP TOOL描述文字  |       参考settings.py       |
-| TOOL_LIST_MEMORIES_DESCRIPTION       |                             _否_                              | 显示所有记忆的MCP TOOL描述文字 |       参考settings.py       |
-| TOOL_DELETE_ALL_MEMORIES_DESCRIPTION |                             _否_                              | 删除所有记忆的MCP TOOL描述文字 |       参考settings.py       |
+| 变量名                                  |                              必填                              |         含义          |            默认值           |
+|--------------------------------------|:------------------------------------------------------------:|:-------------------:|:------------------------:|
+| SERVER_HOST                          |                             _否_                              |  MCP server 的 host  |          0.0.0.0         |
+| SERVER_PORT                          |                             _否_                              |  MCP server 的 port  |           8765           |
+| TABLESTORE_INSTANCE_NAME             | <span style="color:red; font-weight:bold;">**是(yes)**</span> |         实例名         |             -            |
+| TABLESTORE_ENDPOINT                  | <span style="color:red; font-weight:bold;">**是(yes)**</span> |       实例访问地址        |             -            |
+| TABLESTORE_ACCESS_KEY_ID             | <span style="color:red; font-weight:bold;">**是(yes)**</span> |        秘钥 ID        |             -            |
+| TABLESTORE_ACCESS_KEY_SECRET         | <span style="color:red; font-weight:bold;">**是(yes)**</span> |      秘钥 SECRET      |             -            |
+| TABLESTORE_STS_TOKEN                 |                             _否_                              |      STS Token      |           None           |
+| TABLESTORE_VECTOR_DIMENSION          |                             _否_                              |        向量维度         |           1536           |
+| OPENAI_API_KEY                       | <span style="color:red; font-weight:bold;">**是(yes)**</span> |     大模型的API_KEY     |             -            |
+| OPENAI_BASE_URL                      | <span style="color:red; font-weight:bold;">**是(yes)**</span> |    大模型的BASE_URL     |             -            |
+| LLM_MODEL                            |                             _否_                              |      大语言模型的名字       |         qwen-plus        |
+| EMBEDDER_MODEL                       |                             _否_                              |       编码模型的名字       |     text-embedding-v4    |
+| TOOL_ADD_MEMORIES_DESCRIPTION        |                             _否_                              |  添加记忆的MCP TOOL描述文字  |       参考settings.py      |
+| TOOL_SEARCH_MEMORIES_DESCRIPTION     |                             _否_                              |  检索记忆的MCP TOOL描述文字  |       参考settings.py      |
+| TOOL_LIST_MEMORIES_DESCRIPTION       |                             _否_                              | 显示所有记忆的MCP TOOL描述文字 |       参考settings.py      |
+| TOOL_DELETE_ALL_MEMORIES_DESCRIPTION |                             _否_                              | 删除所有记忆的MCP TOOL描述文字 |       参考settings.py      |
 | TOOL_BLACK_LIST                |                             _否_                              |        工具黑名单        | '["delete_all_memories"]' |
-| MCP_STDIO_USER_ID                    |                             _否_                              |   stdio模式下使用的用户id   |    stdio_default_user     |
-| MCP_STDIO_CLIENT_NAME                |                             _否_                              |   stdio模式下使用的客户端名   |   stdio_default_client    |
-| MEM0_FACT_EXTRACTION_PROMPT                |                             _否_                              |  mem0提取事实使用的prompt  |      None（即mem0的默认值）      |
-| MEM0_UPDATE_MEMORY_PROMPT                |                             _否_                              | mem0生成更新策略使用的prompt |      None（即mem0的默认值）      |
+| MCP_STDIO_USER_ID                    |                             _否_                              |   stdio模式下使用的用户id   |    stdio_default_user    |
+| MCP_STDIO_CLIENT_NAME                |                             _否_                              |   stdio模式下使用的客户端名   |   stdio_default_client   |
+| MEM0_FACT_EXTRACTION_PROMPT                |                             _否_                              |  mem0提取事实使用的prompt  |      None（即mem0的默认值）     |
+| MEM0_UPDATE_MEMORY_PROMPT                |                             _否_                              | mem0生成更新策略使用的prompt |      None（即mem0的默认值）     |
+| TABLESTORE_SEARCH_MEMORY_MIN_SCORE                |                             _否_                              |    搜索memory的最小分数    |        None（即返回所有）       |
+| TABLESTORE_SEARCH_MEMORY_LIMIT                |                             _否_                              |    搜索memory的返回个数    |            10            |
 
 其中，需要注意LLM_MODEL（大语言模型的名字）的设置，该字段将决定mem0能否顺利运行
 

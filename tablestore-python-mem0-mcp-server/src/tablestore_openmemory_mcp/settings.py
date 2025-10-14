@@ -83,6 +83,8 @@ class VectorStoreSettings(BaseSettings):
     access_key_id: str = Field(validation_alias="TABLESTORE_ACCESS_KEY_ID")
     access_key_secret: str = Field(validation_alias="TABLESTORE_ACCESS_KEY_SECRET")
     sts_token: Optional[str] = Field(default=None, validation_alias="TABLESTORE_STS_TOKEN")
+    search_memory_min_score: Optional[float] = Field(default=None, validation_alias="TABLESTORE_SEARCH_MEMORY_MIN_SCORE")
+    search_memory_limit: int = Field(default=10, validation_alias="TABLESTORE_SEARCH_MEMORY_LIMIT")
 
 
 class Mem0PromptSettings(BaseSettings):
