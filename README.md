@@ -10,7 +10,7 @@
 
 ## 2. Python 
 1. [入门示例: tablestore-python-mcp-server](https://github.com/aliyun/alibabacloud-tablestore-mcp-server/blob/master/tablestore-python-mcp-server/README.md)
-1. [Mem0-OpenMemory-MCP: tablestore-python-mem0-mcp-server](https://github.com/aliyun/alibabacloud-tablestore-mcp-server/blob/master/tablestore-python-mem0-mcp-serverr/README.md)
+1. [Mem0-OpenMemory-MCP: tablestore-python-mem0-mcp-server](https://github.com/aliyun/alibabacloud-tablestore-mcp-server/blob/master/tablestore-python-mem0-mcp-server/README.md)
 
 
 ## 技术支持
