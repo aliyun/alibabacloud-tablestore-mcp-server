@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pydantic_settings import BaseSettings
-from pydantic import Field
+from pydantic import Field, AliasChoices
 
 DEFAULT_TOOL_ADD_MEMORIES_DESCRIPTION = (
     "Add a new memory. This method is called everytime the user informs anything about themselves, "
@@ -80,9 +80,9 @@ class VectorStoreSettings(BaseSettings):
     vector_dimension: int = Field(default=1536, validation_alias="TABLESTORE_VECTOR_DIMENSION")
     endpoint: str = Field(validation_alias="TABLESTORE_ENDPOINT")
     instance_name: str = Field(validation_alias="TABLESTORE_INSTANCE_NAME")
-    access_key_id: str = Field(validation_alias="TABLESTORE_ACCESS_KEY_ID")
-    access_key_secret: str = Field(validation_alias="TABLESTORE_ACCESS_KEY_SECRET")
-    sts_token: Optional[str] = Field(default=None, validation_alias="TABLESTORE_STS_TOKEN")
+    access_key_id: str = Field(validation_alias=AliasChoices("TABLESTORE_ACCESS_KEY_ID", "ALIBABA_CLOUD_ACCESS_KEY_ID"))
+    access_key_secret: str = Field(validation_alias=AliasChoices("TABLESTORE_ACCESS_KEY_SECRET", "ALIBABA_CLOUD_ACCESS_KEY_SECRET"))
+    sts_token: Optional[str] = Field(default=None, validation_alias=AliasChoices("TABLESTORE_STS_TOKEN", "ALIBABA_CLOUD_SECURITY_TOKEN"))
     search_memory_min_score: Optional[float] = Field(default=None, validation_alias="TABLESTORE_SEARCH_MEMORY_MIN_SCORE")
     search_memory_limit: int = Field(default=10, validation_alias="TABLESTORE_SEARCH_MEMORY_LIMIT")
 
