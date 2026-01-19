@@ -70,6 +70,7 @@ class EmbedderSettings(BaseSettings):
     model: str = Field(default="text-embedding-v4", validation_alias="EMBEDDER_MODEL")
     api_key: str = Field(validation_alias="OPENAI_API_KEY")
     openai_base_url: str = Field(validation_alias="OPENAI_BASE_URL")
+    embedding_dims: int = Field(default=1536, validation_alias="TABLESTORE_VECTOR_DIMENSION")
 
 
 class VectorStoreSettings(BaseSettings):
@@ -117,6 +118,7 @@ def get_memory_config():
                 "model": embedder_settings.model,
                 "api_key": embedder_settings.api_key,
                 "openai_base_url": embedder_settings.openai_base_url,
+                "embedding_dims": embedder_settings.embedding_dims,
             },
         },
         "vector_store": {
