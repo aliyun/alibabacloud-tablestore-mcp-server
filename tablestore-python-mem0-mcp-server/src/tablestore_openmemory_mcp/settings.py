@@ -12,6 +12,12 @@ DEFAULT_TOOL_SEARCH_MEMORIES_DESCRIPTION = "Search through stored memories. This
 DEFAULT_TOOL_LIST_MEMORIES_DESCRIPTION = "List all memories in the user's memory"
 DEFAULT_TOOL_DELETE_ALL_MEMORIES_DESCRIPTION = "Delete all memories in the user's memory"
 
+DEFAULT_TOOL_USER_ID_FIELD_DESCRIPTION = (
+    "The user ID to operate on. "
+    "Try to extract the user_id from the user's input or conversation context. "
+    "If not provided, the server will fall back to the user_id from contextvars context variable."
+)
+
 
 class ToolSettings(BaseSettings):
     """
@@ -33,6 +39,11 @@ class ToolSettings(BaseSettings):
     tool_delete_all_memories_description: str = Field(
         default=DEFAULT_TOOL_DELETE_ALL_MEMORIES_DESCRIPTION,
         validation_alias="TOOL_DELETE_ALL_MEMORIES_DESCRIPTION",
+    )
+
+    tool_user_id_field_description: str = Field(
+        default=DEFAULT_TOOL_USER_ID_FIELD_DESCRIPTION,
+        validation_alias="TOOL_USER_ID_FIELD_DESCRIPTION",
     )
 
     tool_black_list: list[str] = Field(default_factory=lambda: ['delete_all_memories'], validation_alias="TOOL_BLACK_LIST")

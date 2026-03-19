@@ -1,6 +1,6 @@
 import logging
 import json
-from typing import Dict
+from typing import Dict, Optional
 
 from fastmcp import FastMCP
 from mcp.server.sse import SseServerTransport
@@ -9,6 +9,7 @@ from fastapi import FastAPI, Request
 from fastapi.routing import APIRouter
 import contextvars
 from mem0 import Memory
+from pydantic import Field
 
 from tablestore_openmemory_mcp.settings import ToolSettings, StdioNameSettings, VectorStoreSettings
 
@@ -44,8 +45,12 @@ def parse_memories(memories):
 
 
 @mcp.tool(description=tool_settings.tool_add_memories_description)
-async def add_memories(text: str) -> str:
-    uid = user_id_var.get(None)
+async def add_memories(
+    text: str = Field(..., description="要存储的记忆文本内容"),
+    user_id: Optional[str] = Field(default=None, description=tool_settings.tool_user_id_field_description)
+) -> str:
+    # 优先级：入参 user_id > context 变量
+    uid = user_id if user_id is not None else user_id_var.get(None)
     client_name = client_name_var.get(None)
 
     if not uid:
@@ -70,8 +75,11 @@ async def add_memories(text: str) -> str:
 
 
 @mcp.tool(description=tool_settings.tool_search_memories_description)
-async def search_memories(query: str) -> str:
-    uid = user_id_var.get(None)
+async def search_memories(
+    query: str = Field(..., description="搜索查询文本"),
+    user_id: Optional[str] = Field(default=None, description=tool_settings.tool_user_id_field_description)
+) -> str:
+    uid = user_id if user_id is not None else user_id_var.get(None)
     client_name = client_name_var.get(None)
     if not uid:
         return "Error: user_id not provided"
@@ -80,10 +88,10 @@ async def search_memories(query: str) -> str:
 
     try:
         memories = memory_client.search(
-            query=query, 
-            user_id=uid, 
-            limit=vector_store_settings.search_memory_limit, 
-            filters={client_name_key: client_name}, 
+            query=query,
+            user_id=uid,
+            limit=vector_store_settings.search_memory_limit,
+            filters={client_name_key: client_name},
             threshold=vector_store_settings.search_memory_min_score,
         )
         memories = [memory for memory in parse_memories(memories)]
@@ -95,8 +103,10 @@ async def search_memories(query: str) -> str:
 
 
 @mcp.tool(description=tool_settings.tool_list_memories_description)
-async def list_memories() -> str:
-    uid = user_id_var.get(None)
+async def list_memories(
+    user_id: Optional[str] = Field(default=None, description=tool_settings.tool_user_id_field_description)
+) -> str:
+    uid = user_id if user_id is not None else user_id_var.get(None)
     client_name = client_name_var.get(None)
     if not uid:
         return "Error: user_id not provided"
@@ -113,8 +123,10 @@ async def list_memories() -> str:
 
 
 @mcp.tool(description=tool_settings.tool_delete_all_memories_description)
-async def delete_all_memories() -> str:
-    uid = user_id_var.get(None)
+async def delete_all_memories(
+    user_id: Optional[str] = Field(default=None, description=tool_settings.tool_user_id_field_description)
+) -> str:
+    uid = user_id if user_id is not None else user_id_var.get(None)
     client_name = client_name_var.get(None)
     if not uid:
         return "Error: user_id not provided"
@@ -135,6 +147,8 @@ async def delete_all_memories() -> str:
 
 @mcp_router.get("/{client_name}/sse/{user_id}/")
 @mcp_router.get("/{client_name}/sse/{user_id}")
+@mcp_router.get("/{client_name}/sse/")
+@mcp_router.get("/{client_name}/sse")
 async def handle_sse(request: Request):
     """Handle SSE connections for a specific user and client"""
     # Extract user_id and client_name from path parameters
