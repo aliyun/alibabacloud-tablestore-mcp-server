@@ -18,3 +18,8 @@
 欢迎加入我们的钉钉公开群，与我们一起探讨 AI 技术。钉钉群号：36165029092
 
 <img src="./docs/img/dingding_group3.png" alt="store" width="500"/>
+
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/aliyun-alibabacloud-tablestore-mcp-server).
+
