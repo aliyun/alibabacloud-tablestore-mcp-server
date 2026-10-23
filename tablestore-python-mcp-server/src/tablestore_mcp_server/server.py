@@ -42,7 +42,7 @@ class MCPTool:
 @mcp.tool(name="tablestore-search", description=tool_settings.tool_search_description)
 async def search(ctx: Context, query: str, size: int = 20) -> List[str]:
     entries = tablestore_connector.search(query, size)
-    if not entries and len(entries) > 0:
+    if not entries:
         return [f"No information searched for the query '{query}'"]
     content = [f"Results for the query '{query}':"]
     for entry in entries:
